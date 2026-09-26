@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<section class="card">
+
+
+    <div class="topline">
+
+
+        <div>
+
+            <span class="badge">
+                ADMIN DASHBOARD
+            </span>
+
+
+            <h1>
+                All Users
+            </h1>
+
+        </div>
+
+
+        <a
+            class="button"
+            href="/"
+        >
+
+            Home
+
+        </a>
+
+
+    </div>
+
+
+    {% if not rows %}
+
+    <p>
+        No users have been created yet.
+    </p>
+
+    {% endif %}
+
+
+    {% for row in rows %}
+
+
+    <article class="user-card">
+
+
+        <div class="topline">
+
+
+            <div>
+
+                <h2>
+
+                    {{ row.user.username }}
+
+                    <small>
+                        #{{ row.user.user_id }}
+                    </small>
+
+                </h2>
+
+
+                <p>
+
+                    {{ row.user.age }}
+                    years ·
+
+                    {{ row.user.weight }}
+                    kg ·
+
+                    {{ row.user.goal }} ·
+
+                    {{ row.user.intensity|title }}
+
+                </p>
+
+            </div>
+
+
+            <form
+                action="/admin/delete/{{ row.user.user_id }}"
+                method="post"
+                onsubmit="return confirm('Delete this user?')"
+            >
+
+                <button
+                    class="danger"
+                    type="submit"
+                >
+
+                    Delete
+
+                </button>
+
+            </form>
+
+
+        </div>
+
+
+        {% if row.plan %}
+
+
+        <details>
+
+
+            <summary>
+                View Plans
+            </summary>
+
+
+            <h3>
+                Original Plan
+            </h3>
+
+
+            <pre>
+{{ row.plan.original_plan }}
+            </pre>
+
+
+            {% if row.plan.updated_plan %}
+
+
+            <h3>
+                Updated Plan
+            </h3>
+
+
+            <pre>
+{{ row.plan.updated_plan }}
+            </pre>
+
+
+            <p>
+
+                <b>
+                    Feedback:
+                </b>
+
+                {{ row.plan.feedback }}
+
+            </p>
+
+
+            {% endif %}
+
+
+        </details>
+
+
+        {% endif %}
+
+
+    </article>
+
+
+    {% endfor %}
+
+
+</section>
+
+
+{% endblock %}

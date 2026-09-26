@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<section class="narrow card">
+
+
+    <span class="badge">
+        ADMIN
+    </span>
+
+
+    <h1>
+        Admin Login
+    </h1>
+
+
+    {% if error %}
+
+    <div class="alert error">
+
+        {{ error }}
+
+    </div>
+
+    {% endif %}
+
+
+    <form
+        action="/admin/login"
+        method="post"
+    >
+
+
+        <label>
+
+            Username
+
+            <input
+                type="text"
+                name="username"
+                required
+            >
+
+        </label>
+
+
+        <br>
+
+
+        <label>
+
+            Password
+
+            <input
+                type="password"
+                name="password"
+                required
+            >
+
+        </label>
+
+
+        <br>
+
+
+        <button
+            class="primary"
+            type="submit"
+        >
+
+            Login
+
+        </button>
+
+
+    </form>
+
+
+</section>
+
+
+{% endblock %}

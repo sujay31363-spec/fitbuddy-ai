@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<section class="card">
+
+
+    <div class="topline">
+
+
+        <div>
+
+            <span class="badge">
+                PERSONALIZED PLAN
+            </span>
+
+
+            <h1>
+
+                Hello,
+                {{ user.username }}
+                👋
+
+            </h1>
+
+        </div>
+
+
+        <a
+            class="button"
+            href="/"
+        >
+
+            New Plan
+
+        </a>
+
+
+    </div>
+
+
+    <div class="stats">
+
+
+        <div>
+
+            <b>
+                {{ user.age }}
+            </b>
+
+            <small>
+                Age
+            </small>
+
+        </div>
+
+
+        <div>
+
+            <b>
+                {{ user.weight }} kg
+            </b>
+
+            <small>
+                Weight
+            </small>
+
+        </div>
+
+
+        <div>
+
+            <b>
+                {{ user.goal }}
+            </b>
+
+            <small>
+                Goal
+            </small>
+
+        </div>
+
+
+        <div>
+
+            <b>
+                {{ user.intensity|title }}
+            </b>
+
+            <small>
+                Intensity
+            </small>
+
+        </div>
+
+
+    </div>
+
+
+    {% if is_demo %}
+
+    <div class="alert">
+
+        Demo mode is active because
+        Gemini is not configured.
+
+        Add GEMINI_API_KEY to your
+        .env file to use live AI.
+
+    </div>
+
+    {% endif %}
+
+
+    {% if message %}
+
+    <div class="alert success">
+
+        {{ message }}
+
+    </div>
+
+    {% endif %}
+
+
+    <h2>
+        🏋️ 7-Day Workout Plan
+    </h2>
+
+
+    <pre>
+{{ plan.updated_plan or plan.original_plan }}
+    </pre>
+
+
+    <h2>
+        🥗 Nutrition / Recovery Tip
+    </h2>
+
+
+    <div class="tip">
+
+        {{ plan.nutrition_tip }}
+
+    </div>
+
+
+    <h2>
+        💬 Improve This Plan
+    </h2>
+
+
+    <form
+        action="/submit-feedback"
+        method="post"
+    >
+
+
+        <input
+            type="hidden"
+            name="user_id"
+            value="{{ user.user_id }}"
+        >
+
+
+        <textarea
+            name="feedback"
+            required
+            placeholder="Example: Add more cardio or include more rest days..."
+        ></textarea>
+
+
+        <button
+            class="primary"
+            type="submit"
+        >
+
+            Update My Plan →
+
+        </button>
+
+
+    </form>
+
+
+</section>
+
+
+{% endblock %}
